@@ -8,7 +8,6 @@ entity Store{
 
 entity Product{
     productID <<key>>
-    external_id 
     name
     typeID
 }
@@ -19,9 +18,12 @@ entity ProductType{
 }
 
 relationship Inventory{
-    storeID_ProductID_composite <<key>>
+    storeID
+    productID
+    externalID
     price
     quantity
+    storeID_ProductID_composite <<key>>
 }
 
 relationship Has {
