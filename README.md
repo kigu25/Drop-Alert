@@ -5,8 +5,8 @@ This is a application that will search for updates on different websites in thei
 ## DATABASE DESIGN
 Diagram explaining the Databse-structure using an E/R-Diagram.
 <p align="center">
-  <a href="Diagrams/ER_Diagram.png">
-    <img src="Diagrams/ER_Diagram.png" width="730" />
+  <a href="Diagrams/ER_Diagram_Final.png">
+    <img src="Diagrams/ER_Diagram_Final.png" width="730" />
   </a>
 </p>
 <p align="center"><i>Click to open full size.</i></p>
