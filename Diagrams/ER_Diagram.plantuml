@@ -23,6 +23,7 @@ relationship Inventory{
     externalID
     price
     quantity
+    lastUpdated
     storeID_ProductID_composite <<key>>
 }
 

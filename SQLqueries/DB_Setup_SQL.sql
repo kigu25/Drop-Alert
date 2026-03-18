@@ -27,6 +27,7 @@ CREATE TABLE inventory(
     externalID INT NOT NULL,
     price DECIMAL(10,2),
     quantity INT,
+    lastUpdated DATETIME,
     
     PRIMARY KEY (storeID, productID),
     FOREIGN KEY (storeID) REFERENCES store(storeID),
