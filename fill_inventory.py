@@ -1,6 +1,8 @@
 from DB_Config.Db_init import get_connection
 import requests
 
+# TODO: Dela upp funktionen i mindre delar så de går att återanvända
+
 def fill_inventory():
     conn = get_connection()
     cur = conn.cursor(dictionary=True)
