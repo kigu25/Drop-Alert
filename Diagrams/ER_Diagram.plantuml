@@ -1,15 +1,9 @@
-@startchen E/R Diagram For Workout Tracker
+@startchen E/R Diagram For Drop Alert
 top to bottom direction
 
 entity Store{
     storeID <<key>>
     storename
-}
-
-entity Product{
-    productID <<key>>
-    name
-    typeID
 }
 
 entity ProductType{ 
@@ -18,22 +12,15 @@ entity ProductType{
 }
 
 relationship Inventory{
-    storeID
-    productID
+    storeID_externalID_composite <<key>>
     externalID
+    typeID
     price
     quantity
     lastUpdated
-    storeID_ProductID_composite <<key>>
-}
-
-relationship Has {
 }
 
 Store -M- Inventory
-Inventory -M- Product
-Product -M- Has
-Has -1- ProductType
-
+Inventory -M- ProductType
 
 @endchen
