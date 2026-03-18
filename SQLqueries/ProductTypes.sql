@@ -9,3 +9,5 @@ INSERT INTO productType(typeName) VALUES
 ("Mini Tin"),
 ("Collector Chest")
 ;
+
+SELECT * FROM productType;
