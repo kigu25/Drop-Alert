@@ -1,0 +1,36 @@
+@startchen E/R Diagram For Workout Tracker
+top to bottom direction
+
+entity Store{
+    storeID <<key>>
+    storename
+}
+
+entity Product{
+    productID <<key>>
+    external_id 
+    name
+    typeID
+}
+
+entity ProductType{ 
+    typeID <<key>>
+    typeName : String
+}
+
+relationship Inventory{
+    storeID_ProductID_composite <<key>>
+    price
+    quantity
+}
+
+relationship Has {
+}
+
+Store -M- Inventory
+Inventory -M- Product
+Product -M- Has
+Has -1- ProductType
+
+
+@endchen
