@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from DB_Config.Db_init import get_connection
+from fill_inventory import fill_inventory
 
 def main():
 
@@ -12,6 +13,7 @@ def main():
 
     cur.close()
     conn.close
+    fill_inventory()
 
 if __name__ == "__main__":
     main()
