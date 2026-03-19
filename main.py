@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from DB_Config.Db_init import get_connection
-from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, matchItems
+from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, matchItems, insert_matches
 
 def main():
 
@@ -12,11 +12,13 @@ def main():
     print("ACTIVE DATABASE: ", cur.fetchone()[0])
 
     cur.close()
-    conn.close
+    conn.close()
 
     productTypes = get_productTypes()
     products, store = findItemsFromApi()
-    matchItems(productTypes, products, store)
+    matching_items = matchItems(productTypes, products)
+    insert_matches(matching_items, store)
+
 
 if __name__ == "__main__":
     main()

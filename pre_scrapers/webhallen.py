@@ -44,26 +44,29 @@ def findItemsFromApi():
 
 
 
-def matchItems(product_types, products, store):
+def matchItems(product_types, products):
 
-    matches = []
+    matching_items = []
 
     for key in products:
        for type_name, type_id in product_types.items():
            if type_name in key["name"]:
                print(f"MATCH: {key['name']} {key['id']} {key['price']['price']}: {type_name}")
-               matches.append((key['name'], key["id"], type_id, float(key["price"]["price"]), key["stock"]["web"]))
+               matching_items.append((key['name'], key["id"], type_id, float(key["price"]["price"]), key["stock"]["web"]))
 
-    print(matches)
-    
+    print(matching_items)
+    return matching_items
 
 
+
+
+def insert_matches(matching_items, store):
     conn = get_connection()
     cur = conn.cursor()
 
     store_id = get_store_id(store)
 
-    for key in matches:
+    for key in matching_items:
         cur.execute("INSERT IGNORE INTO Inventory (storeID, externalID, typeID, price, quantity) "
         "VALUES (%s, %s, %s, %s, %s)", (store_id, key[1], key[2], key[3], key[4]))
 
