@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from DB_Config.Db_init import get_connection
-from fill_inventory import get_productTypes, findItemsFromApi, matchItems
+from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, matchItems
 
 def main():
 
