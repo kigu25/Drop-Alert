@@ -1,5 +1,6 @@
 from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, get_store_id, matchItems, insert_matches
 from DB_Config.Db_init import get_connection
+from webhooks.discord import discord_webhook
 
 
 
@@ -30,5 +31,5 @@ def webhallen_stock_monitor():
             for external_id, quantity in rows_db:
                 if external_id == key["id"]:
                     if key["quantity"] > quantity:
-                        print("STOCK HAS RISEN!!!")
+                        discord_webhook(key["name"], key["price"], store, key["id"])
                 
