@@ -52,7 +52,13 @@ def matchItems(product_types, products):
        for type_name, type_id in product_types.items():
            if type_name in key["name"]:
                print(f"MATCH: {key['name']} {key['id']} {key['price']['price']}: {type_name}")
-               matching_items.append((key['name'], key["id"], type_id, float(key["price"]["price"]), key["stock"]["web"]))
+               matching_items.append({
+                   "name": key["name"],
+                   "id": key["id"],
+                   "type_id": type_id,
+                   "price": float(key["price"]["price"]),
+                   "quantity": key["stock"]["web"]
+               })
 
     print(matching_items)
     return matching_items
@@ -68,7 +74,7 @@ def insert_matches(matching_items, store):
 
     for key in matching_items:
         cur.execute("INSERT IGNORE INTO Inventory (storeID, externalID, typeID, price, quantity) "
-        "VALUES (%s, %s, %s, %s, %s)", (store_id, key[1], key[2], key[3], key[4]))
+        "VALUES (%s, %s, %s, %s, %s)", (store_id, key["id"], key["type_id"], key["price"], key["quantity"]))
 
     conn.commit()
     cur.close()
