@@ -19,6 +19,8 @@ def discord_webhook(item_name, price, store, itemID):
         color="E74C3C"
     )
 
+    embed.set_author(name=f"Restock", icon_url=f"https://www.{store}.com/favicon.ico")
+
     embed.add_embed_field(name="Store", value=store, inline=True)
     embed.add_embed_field(name="Price", value=f"{price} kr", inline=True)
     embed.add_embed_field(name="\u200b", value=f"[Buy now]({product_url})", inline=False)
