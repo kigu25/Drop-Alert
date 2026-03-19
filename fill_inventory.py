@@ -1,9 +1,8 @@
 from DB_Config.Db_init import get_connection
 import requests
 
-# TODO: Dela upp funktionen i mindre delar så de går att återanvända
 
-def fill_inventory():
+def get_productTypes():
     conn = get_connection()
     cur = conn.cursor(dictionary=True)
     cur.execute("SELECT typeName, typeID FROM productType")
@@ -11,8 +10,16 @@ def fill_inventory():
     product_types = {}
     for row in cur.fetchall():
         product_types[row["typeName"]] = row["typeID"]
-    
 
+    cur.close()
+    conn.close()
+    
+    return product_types
+
+
+
+
+def findItemsFromApi():
     url = "https://www.webhallen.com/api/productdiscovery/search/pokemon?page=1&touchpoint=DESKTOP&totalProductCountSet=false&origin=ORGANIC&sortBy=latest&limit=100"
 
     headers = {
@@ -22,16 +29,23 @@ def fill_inventory():
 
     data = api_response.json()
 
-    cur.close()
-    conn.close()
 
     products = data["products"]
     print(len(products))
 
+    start = "https://www."
+    end = ".com"
+    store = (url[url.find(start)+len(start):url.rfind(end)])
+    
+    return products, store
 
-  
+
+
+
+
+def matchItems(product_types, products, store):
+
     matches = []
-
 
     for key in products:
        for type_name, type_id in product_types.items():
@@ -40,12 +54,29 @@ def fill_inventory():
                matches.append((key['name'], key["id"], type_id, float(key["price"]["price"]), key["stock"]["web"]))
 
     print(matches)
-
-    ## Get the stores name using the url entered before
-    start = "https://www."
-    end = ".com"
-    store = (url[url.find(start)+len(start):url.rfind(end)])
     
+
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    store_id = get_store_id(store)
+
+    for key in matches:
+        cur.execute("INSERT IGNORE INTO Inventory (storeID, externalID, typeID, price, quantity) "
+        "VALUES (%s, %s, %s, %s, %s)", (store_id, key[1], key[2], key[3], key[4]))
+
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
+
+
+
+
+def get_store_id(store):
+
     conn = get_connection()
     cur = conn.cursor()
 
@@ -53,11 +84,7 @@ def fill_inventory():
     "WHERE storename = %s", (store,))
     store_id = cur.fetchone()[0]
 
-    print(store_id)
-
-    for key in matches:
-        cur.execute("INSERT IGNORE INTO Inventory (storeID, externalID, typeID, price, quantity) " \
-        "VALUES (%s, %s, %s, %s, %s)", (store_id, key[1], key[2], key[3], key[4]))
-    conn.commit()
     cur.close()
     conn.close()
+
+    return store_id

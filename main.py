@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from DB_Config.Db_init import get_connection
-from fill_inventory import fill_inventory
+from fill_inventory import get_productTypes, findItemsFromApi, matchItems
 
 def main():
 
@@ -13,7 +13,10 @@ def main():
 
     cur.close()
     conn.close
-    fill_inventory()
+
+    productTypes = get_productTypes()
+    products, store = findItemsFromApi()
+    matchItems(productTypes, products, store)
 
 if __name__ == "__main__":
     main()
