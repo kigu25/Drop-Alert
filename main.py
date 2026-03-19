@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from DB_Config.Db_init import get_connection
 from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, matchItems, insert_matches
+from webbhooks.discord import discord_webhook
 
 def main():
 
@@ -18,6 +19,8 @@ def main():
     products, store = findItemsFromApi()
     matching_items = matchItems(productTypes, products)
     insert_matches(matching_items, store)
+    discord_webhook()
+
 
 
 if __name__ == "__main__":
