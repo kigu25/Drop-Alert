@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 import os
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
@@ -6,8 +5,6 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 
 def discord_webhook(item_name, price, store, itemID):
     product_url = f"https://www.{store}.com/se/product/{itemID}"
-
-    load_dotenv()
     webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
 
     webhook = DiscordWebhook(url=webhook_url, username="Restock Alert")
