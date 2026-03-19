@@ -1,10 +1,14 @@
 from dotenv import load_dotenv
 from DB_Config.Db_init import get_connection
-from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, matchItems, insert_matches
-from utils.discord import discord_webhook
+from utils.scheduler import monitors, pre_scrapers
+import schedule
+import time
+
+
 
 def main():
 
+    #Test so we use the correct DB
     load_dotenv()
     conn = get_connection()
     cur = conn.cursor()
@@ -15,11 +19,19 @@ def main():
     cur.close()
     conn.close()
 
-    productTypes = get_productTypes()
-    products, store = findItemsFromApi()
-    matching_items = matchItems(productTypes, products)
-    insert_matches(matching_items, store)
-    discord_webhook("151", "899", "Webhallen", 362583)
+
+
+
+    # Schedule pre_scraper and monitor
+    schedule.every(6).hours.do(pre_scrapers)
+    schedule.every(30).seconds.do(monitors)
+
+    pre_scrapers()
+    monitors()
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
 
