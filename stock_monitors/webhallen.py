@@ -1,7 +1,7 @@
-from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, get_store_id, matchItems, insert_matches
+from pre_scrapers.webhallen import findItemsFromApi, get_store_id, matchItems, insert_matches
 from DB_Config.Db_init import get_connection
 from utils.discord import discord_webhook
-from utils.db_calls import update_quantity
+from utils.db_calls import update_quantity, get_productTypes
 
 
 def webhallen_stock_monitor():

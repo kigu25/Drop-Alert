@@ -2,21 +2,6 @@ from DB_Config.Db_init import get_connection
 import requests
 
 
-def get_productTypes():
-    conn = get_connection()
-    cur = conn.cursor(dictionary=True)
-    cur.execute("SELECT typeName, typeID FROM productType")
-
-    product_types = {}
-    for row in cur.fetchall():
-        product_types[row["typeName"]] = row["typeID"]
-
-    cur.close()
-    conn.close()
-    
-    return product_types
-
-
 
 # TODO: Switcha så vi inte behöver hårdkoda url utan kan skicka in de från en lista av färdiga url vi sparat någonstans
 

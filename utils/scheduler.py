@@ -1,5 +1,6 @@
-from pre_scrapers.webhallen import get_productTypes, findItemsFromApi, matchItems, insert_matches
+from pre_scrapers.webhallen import findItemsFromApi, matchItems, insert_matches
 from stock_monitors.webhallen import webhallen_stock_monitor
+from utils.db_calls import get_productTypes
 
 
 def pre_scrapers():
