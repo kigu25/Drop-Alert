@@ -1,6 +1,6 @@
 CREATE TABLE inventory(
     storeID INT NOT NULL,
-    externalID INT NOT NULL,
+    externalID BIGINT NOT NULL,
     typeID INT NOT NULL,
     price DECIMAL(10,2),
     quantity INT,
@@ -10,3 +10,6 @@ CREATE TABLE inventory(
     FOREIGN KEY (storeID) REFERENCES store(storeID),
     FOREIGN KEY (typeID) REFERENCES productType(typeID)
 );
+
+DELETE FROM inventory WHERE storeID = 2;
+SELECT * FROM inventory;
