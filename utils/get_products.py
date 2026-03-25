@@ -9,13 +9,12 @@ def get_webhallen_products(store):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
     }
+
     api_response = requests.get(URL, headers=headers)
-
-    data = api_response.json()
-
-    products = data["products"]
-    print(len(products))
     
+    data = api_response.json()
+    products = data["products"]
+
     return products
 
 
