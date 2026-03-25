@@ -22,7 +22,7 @@ def webhallen_stock_monitor():
     cur.close()
     conn.close()
     
-    matching_items = items.matchItems(product_types, products)
+    matching_items = items.match_items_webhallen(product_types, products)
 
     known_ids = [row[0] for row in rows_db]
     for key in matching_items:
