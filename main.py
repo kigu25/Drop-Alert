@@ -5,10 +5,7 @@ import schedule
 import time
 
 
-
 def main():
-
-    #Test so we use the correct DB
     load_dotenv()
     conn = get_connection()
     cur = conn.cursor()
@@ -20,10 +17,9 @@ def main():
     conn.close()
 
 
-
-
     # Schedule pre_scraper and monitor
     schedule.every(6).hours.do(pre_scrapers)
+    #TODO: Add a monitor for manatorsk
     schedule.every(30).seconds.do(monitors)
 
     pre_scrapers()
