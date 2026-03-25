@@ -1,14 +1,13 @@
-from pre_scrapers.webhallen import findItemsFromApi, matchItems, insert_matches
+from pre_scrapers.webhallen import insert_matches
 from DB_Config.Db_init import get_connection
-from utils.discord import discord_webhook
-from utils.db_calls import update_quantity, get_productTypes, get_store_id
+from utils import items, db_calls, discord
 
 
 def webhallen_stock_monitor():
-    product_types = get_productTypes()
-    products, store = findItemsFromApi()
+    product_types = db_calls.get_productTypes()
+    products, store = items.findItemsFromApi()
 
-    store_id = get_store_id(store)
+    store_id = db_calls.get_store_id(store)
 
     conn = get_connection()
     cur = conn.cursor()
@@ -21,7 +20,7 @@ def webhallen_stock_monitor():
     cur.close()
     conn.close()
     
-    matching_items = matchItems(product_types, products)
+    matching_items = items.matchItems(product_types, products)
 
     known_ids = [row[0] for row in rows_db]
     for key in matching_items:
@@ -32,8 +31,8 @@ def webhallen_stock_monitor():
             for external_id, quantity in rows_db:
                 if external_id == key["id"]:
                     if key["quantity"] > quantity:
-                        discord_webhook(key["name"], key["price"], store, key["id"])
+                        discord.discord_webhook(key["name"], key["price"], store, key["id"])
                     if key["quantity"] != quantity:
-                        update_quantity(store_id, key["id"], key["quantity"])
+                        db_calls.update_quantity(store_id, key["id"], key["quantity"])
 
 
