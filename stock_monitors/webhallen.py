@@ -1,4 +1,3 @@
-from pre_scrapers.webhallen import insert_matches
 from DB_Config.Db_init import get_connection
 from utils import get_products, db_calls, discord, match_products
 
@@ -27,7 +26,7 @@ def webhallen_stock_monitor():
     known_ids = [row[0] for row in rows_db]
     for key in matching_items:
         if key["id"] not in known_ids:
-            insert_matches([key], STORE)
+            db_calls.insert_matches([key], STORE)
 
         else:
             for external_id, quantity in rows_db:
