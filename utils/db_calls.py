@@ -27,3 +27,20 @@ def get_productTypes():
     conn.close()
     
     return product_types
+
+
+
+
+def get_store_id(store):
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("SELECT storeID FROM store "
+    "WHERE storename = %s", (store,))
+    store_id = cur.fetchone()[0]
+
+    cur.close()
+    conn.close()
+
+    return store_id

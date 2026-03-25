@@ -1,4 +1,5 @@
 from DB_Config.Db_init import get_connection
+from utils.db_calls import get_store_id
 import requests
 
 
@@ -64,22 +65,3 @@ def insert_matches(matching_items, store):
     conn.commit()
     cur.close()
     conn.close()
-
-
-
-
-
-
-def get_store_id(store):
-
-    conn = get_connection()
-    cur = conn.cursor()
-
-    cur.execute("SELECT storeID FROM store "
-    "WHERE storename = %s", (store,))
-    store_id = cur.fetchone()[0]
-
-    cur.close()
-    conn.close()
-
-    return store_id
