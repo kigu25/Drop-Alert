@@ -1,6 +1,13 @@
 from DB_Config.Db_init import get_connection
-from utils.db_calls import get_store_id
+from utils.db_calls import get_store_id, get_productTypes
 import requests
+
+
+def run():
+    productTypes = get_productTypes()
+    products, store = findItemsFromApi()
+    matching_items = matchItems(productTypes, products)
+    insert_matches(matching_items, store)
 
 
 
