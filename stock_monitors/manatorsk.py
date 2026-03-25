@@ -35,3 +35,5 @@ def manatorsk_stock_monitor():
                         discord.discord_webhook(key["name"], key["price"], STORE, key["id"])
                     if key["quantity"] != quantity:
                         db_calls.update_quantity(store_id, key["id"], key["quantity"])
+    #TODO: Add a discord webhook to notify admins when a new product that's not in known_ids is found and added to DB
+    print("Manatorsk Done")

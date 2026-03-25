@@ -36,5 +36,5 @@ def webhallen_stock_monitor():
                         discord.discord_webhook(key["name"], key["price"], STORE, key["id"])
                     if key["quantity"] != quantity:
                         db_calls.update_quantity(store_id, key["id"], key["quantity"])
-
+    print("Webhallen done")
 
