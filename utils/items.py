@@ -1,10 +1,10 @@
 import requests
+from utils import stores_info
 
 
 
-# TODO: Switcha så vi inte behöver hårdkoda url utan kan skicka in de från en lista av färdiga url vi sparat någonstans
-def findItemsFromApi():
-    url = "https://www.webhallen.com/api/productdiscovery/search/pokemon?page=1&touchpoint=DESKTOP&totalProductCountSet=false&origin=ORGANIC&sortBy=latest&limit=100"
+def findItemsFromApi(store):
+    url = stores_info.find_url(store)
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
@@ -13,15 +13,10 @@ def findItemsFromApi():
 
     data = api_response.json()
 
-
     products = data["products"]
     print(len(products))
-
-    start = "https://www."
-    end = ".com"
-    store = (url[url.find(start)+len(start):url.rfind(end)])
     
-    return products, store
+    return products
 
 
 
