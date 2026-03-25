@@ -19,8 +19,7 @@ def main():
 
     # Schedule pre_scraper and monitor
     schedule.every(6).hours.do(pre_scrapers)
-    #TODO: Add a monitor for manatorsk
-    schedule.every(30).seconds.do(monitors)
+    schedule.every(1).minutes.do(monitors)
 
     pre_scrapers()
     monitors()

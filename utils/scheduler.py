@@ -1,5 +1,6 @@
 from pre_scrapers import webhallen, manatorsk
-from stock_monitors import webhallen, manatorsk
+from stock_monitors.webhallen import webhallen_stock_monitor
+from stock_monitors.manatorsk import manatorsk_stock_monitor
 
 
 def pre_scrapers():
@@ -9,7 +10,7 @@ def pre_scrapers():
 
 
 def monitors():
-    webhallen.webhallen_stock_monitor()
-    manatorsk.manatorsk_stock_monitor()
+    webhallen_stock_monitor()
+    manatorsk_stock_monitor()
 
 

@@ -3,6 +3,7 @@ from utils import get_products, db_calls, discord, match_products
 
 
 def webhallen_stock_monitor():
+    print("Running Webhallen Monitor")
     STORE = "Webhallen"
     
     product_types = db_calls.get_productTypes()

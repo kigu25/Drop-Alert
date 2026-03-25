@@ -2,6 +2,7 @@ from DB_Config.Db_init import get_connection
 from utils import get_products, db_calls, discord, match_products
 
 def manatorsk_stock_monitor():
+    print("Running Manatorsk Monitor")
     STORE = "Manatorsk"
 
     product_types = db_calls.get_productTypes()
