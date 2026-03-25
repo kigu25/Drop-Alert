@@ -1,13 +1,13 @@
 from pre_scrapers.webhallen import insert_matches
 from DB_Config.Db_init import get_connection
-from utils import items, db_calls, discord
+from utils import get_products, db_calls, discord, match_products
 
 
 def webhallen_stock_monitor():
     STORE = "Webhallen"
     
     product_types = db_calls.get_productTypes()
-    products = items.get_webhallen_products(STORE)
+    products = get_products.get_webhallen_products(STORE)
 
     store_id = db_calls.get_store_id(STORE)
 
@@ -22,7 +22,7 @@ def webhallen_stock_monitor():
     cur.close()
     conn.close()
     
-    matching_items = items.match_items_webhallen(product_types, products)
+    matching_items = match_products.match_items_webhallen(product_types, products)
 
     known_ids = [row[0] for row in rows_db]
     for key in matching_items:
