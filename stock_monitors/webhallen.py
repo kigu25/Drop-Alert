@@ -7,7 +7,7 @@ def webhallen_stock_monitor():
     STORE = "Webhallen"
     
     product_types = db_calls.get_productTypes()
-    products = items.findItemsFromApi(STORE)
+    products = items.get_webhallen_products(STORE)
 
     store_id = db_calls.get_store_id(STORE)
 

@@ -3,7 +3,7 @@ from utils import stores_info
 
 
 
-def findItemsFromApi(store):
+def get_webhallen_products(store):
     url = stores_info.find_url(store)
 
     headers = {
@@ -17,6 +17,8 @@ def findItemsFromApi(store):
     print(len(products))
     
     return products
+
+
 
 
 
