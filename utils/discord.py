@@ -33,7 +33,7 @@ def restock_webhook(item_name, price, store, itemID):
 def pinger_webhook():
     webhook_url = os.getenv("DISCORD_PINGER_URL")
 
-    webhook = DiscordWebhook(url=webhook_url, username="Pinger")
+    webhook = DiscordWebhook(url=webhook_url, username="VPS HealtCheck")
 
     embed = DiscordEmbed(
         title="VPS OK",
