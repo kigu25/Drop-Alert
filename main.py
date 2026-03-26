@@ -20,7 +20,7 @@ def main():
     # Schedule for pre_scrape, monitors & healtCheck
     schedule.every(6).hours.do(pre_scrapers)
     schedule.every(3).minutes.do(monitors)
-    schedule.every(10).minutes.do(pinger)
+    schedule.every(1).hours.do(pinger)
 
     pre_scrapers()
     monitors()
