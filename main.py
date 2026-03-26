@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from DB_Config.Db_init import get_connection
-from utils.scheduler import monitors, pre_scrapers
+from utils.scheduler import monitors, pre_scrapers, pinger
 import schedule
 import time
 
@@ -17,12 +17,14 @@ def main():
     conn.close()
 
 
-    # Schedule pre_scraper and monitor
+    # Schedule for pre_scrape, monitors & healtCheck
     schedule.every(6).hours.do(pre_scrapers)
     schedule.every(3).minutes.do(monitors)
+    schedule.every(1).minutes.do(pinger)
 
     pre_scrapers()
     monitors()
+    pinger()
 
     while True:
         schedule.run_pending()
