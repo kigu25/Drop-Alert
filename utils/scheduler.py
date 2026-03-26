@@ -1,6 +1,7 @@
 from pre_scrapers import webhallen, manatorsk
 from stock_monitors.webhallen import webhallen_stock_monitor
 from stock_monitors.manatorsk import manatorsk_stock_monitor
+from utils.discord import pinger_webhook
 
 
 def pre_scrapers():
@@ -14,3 +15,6 @@ def monitors():
     manatorsk_stock_monitor()
 
 
+
+def pinger():
+    pinger_webhook()
