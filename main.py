@@ -4,6 +4,8 @@ from utils.scheduler import monitors, pre_scrapers, pinger
 import schedule
 import time
 
+#TODO: Set-up tests for all the flows, both pos and negative.
+
 
 def main():
     load_dotenv()
