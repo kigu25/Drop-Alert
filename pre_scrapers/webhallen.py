@@ -7,8 +7,3 @@ def run():
     products = get_products.get_webhallen_products(STORE)
     matching_items = match_products.match_items_webhallen(product_types, products)
     db_calls.insert_matches(matching_items, STORE)
-
-
-
-
-
