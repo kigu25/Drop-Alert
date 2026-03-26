@@ -17,7 +17,7 @@ def update_quantity(storeID, external_id ,quantity):
 def get_productTypes():
     conn = get_connection()
     cur = conn.cursor(dictionary=True)
-    cur.execute("SELECT typeName, typeID FROM productType")
+    cur.execute("SELECT typeName, typeID FROM producttype")
 
     product_types = {}
     for row in cur.fetchall():
@@ -37,7 +37,7 @@ def insert_matches(matching_items, store):
     store_id = get_store_id(store)
 
     for key in matching_items:
-        cur.execute("INSERT IGNORE INTO Inventory (storeID, externalID, typeID, price, quantity) "
+        cur.execute("INSERT IGNORE INTO inventory (storeID, externalID, typeID, price, quantity) "
         "VALUES (%s, %s, %s, %s, %s)", (store_id, key["id"], key["type_id"], key["price"], key["quantity"]))
 
     conn.commit()
