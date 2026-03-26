@@ -19,7 +19,7 @@ def main():
 
     # Schedule pre_scraper and monitor
     schedule.every(6).hours.do(pre_scrapers)
-    schedule.every(1).minutes.do(monitors)
+    schedule.every(3).minutes.do(monitors)
 
     pre_scrapers()
     monitors()
