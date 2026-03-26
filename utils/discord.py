@@ -3,7 +3,7 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 
 
 
-def discord_webhook(item_name, price, store, itemID):
+def restock_webhook(item_name, price, store, itemID):
     product_url = f"https://www.{store}.com/se/product/{itemID}"
     webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
 
@@ -23,6 +23,23 @@ def discord_webhook(item_name, price, store, itemID):
     embed.add_embed_field(name="\u200b", value=f"[Buy now]({product_url})", inline=False)
 
     embed.set_footer(text="Restock Alert", icon_url=f"https://www.{store}.com/favicon.ico")
+    embed.set_timestamp()
+
+    webhook.add_embed(embed)
+    webhook.execute()
+
+
+def pinger_webhook():
+    webhook_url = os.getenv("DISCORD_PINGER_URL")
+
+    webhook = DiscordWebhook(url=webhook_url, username="Pinger")
+
+    embed = DiscordEmbed(
+        title="VPS OK",
+        description="VPS is still running - OK",
+        color="008000"
+    )
+
     embed.set_timestamp()
 
     webhook.add_embed(embed)
