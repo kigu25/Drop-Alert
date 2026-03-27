@@ -29,6 +29,7 @@ def match_items_manatorsk(product_types, products):
                     "id": stripped_id,
                     "type_id": type_id,
                     "price": float(key["variants"][0]["price"]),
-                    "quantity": max(0, key["variants"][0]["inventoryQuantity"])
+                    "quantity": max(0, key["variants"][0]["inventoryQuantity"]),
+                    "handle": key["handle"]
                 })
     return matching_items
