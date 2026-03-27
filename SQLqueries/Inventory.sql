@@ -13,3 +13,8 @@ CREATE TABLE inventory(
 
 DELETE FROM inventory WHERE storeID = 2;
 SELECT * FROM inventory;
+
+UPDATE inventory SET quantity = -2
+WHERE externalID = 373574
+
+USE drop_alert;
