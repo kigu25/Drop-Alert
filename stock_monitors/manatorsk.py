@@ -29,13 +29,13 @@ def manatorsk_stock_monitor():
         # If the ID is not known, insert it to DB and send a webhook to notify of new product
         if key["id"] not in known_ids:
             db_calls.insert_matches([key], STORE)
-            new_product_webhook(STORE, key["name"], key["price"])
+            new_product_webhook(STORE, key["name"], key["price"], key["handle"], key["img_url"])
 
         else:
             for external_id, quantity in rows_db:
                 if external_id == key["id"]:
                     if key["quantity"] > quantity:
-                        discord.restock_webhook(key["name"], key["price"], STORE, key["id"])
+                        discord.restock_webhook(key["name"], key["price"], STORE, key["handle"], key["img_url"])
                     if key["quantity"] != quantity:
                         db_calls.update_quantity(store_id, key["id"], key["quantity"])
     #TODO: Add a discord webhook to notify admins when a new product that's not in known_ids is found and added to DB
