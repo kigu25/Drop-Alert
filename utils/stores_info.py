@@ -17,8 +17,16 @@ def find_url(store):
 
 
 def build_product_url(store, product_id):
-    pass
+    URL = ""
+    starting = "https://www."
+    
 
+    if store == "Webhallen":
+        URL = starting + "webhallen.com/product/" + product_id
+    elif store == "Manatorsk":
+        URL = starting + "manatorsk.com/product/" + product_id ##ProductID for mana is their handle
+
+    return URL
 
 
 
