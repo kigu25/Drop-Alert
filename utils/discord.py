@@ -1,11 +1,10 @@
 import os
+from utils.stores_info import build_product_url, build_image_url
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 
-#TODO: This product_url build will prob not work for all different sites.
-#?: Solution is to build the url within the monitor/scraper and sent to this function, we could also use that to send IMG url to display images in webhook
-def restock_webhook(item_name, price, store, itemID):
-    product_url = f"https://www.{store}.com/product/{itemID}"
+def restock_webhook(item_name, price, store, product_id):
+    product_url = build_product_url(store, product_id)
     webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
 
     webhook = DiscordWebhook(url=webhook_url, username="Restock Alert")
