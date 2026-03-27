@@ -8,9 +8,6 @@ LINK_DICT = {
 
 
 
-
-
-
 def find_url(store):
     return LINK_DICT.get(store)
 
@@ -22,21 +19,24 @@ def build_product_url(store, product_id):
     
 
     if store == "Webhallen":
-        URL = STARTING + store + ".com/product/" + product_id
+        URL = f"{STARTING}{store}.com/product/{product_id}"
     elif store == "Manatorsk":
-        URL = "manatorsk.com/products/" + product_id ##ProductID for mana is their handle
+        URL = f"https://manatorsk.com/products/{product_id}" ##ProductID for mana is their handle
 
     return URL
 
 
 
 def build_image_url(store, product_id, img_url = ""):
+
     URL = ""
     STARTING = "https://www."
 
     if store == "Webhallen":
-        URL = STARTING + store + "/images/product/" + product_id + "?trim"
+        URL = f"{STARTING}{store}.com/images/product/{product_id}?trim"
     elif store == "Manatorsk":
         URL = img_url
+    else:
+        print("ERROR: Could not generate image_url !")
     
     return URL
