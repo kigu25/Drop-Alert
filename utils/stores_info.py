@@ -24,7 +24,7 @@ def build_product_url(store, product_id):
     if store == "Webhallen":
         URL = starting + "webhallen.com/product/" + product_id
     elif store == "Manatorsk":
-        URL = starting + "manatorsk.com/product/" + product_id ##ProductID for mana is their handle
+        URL = starting + "manatorsk.com/products/" + product_id ##ProductID for mana is their handle
 
     return URL
 
