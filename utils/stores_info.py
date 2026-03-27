@@ -18,11 +18,11 @@ def find_url(store):
 
 def build_product_url(store, product_id):
     URL = ""
-    starting = "https://www."
+    STARTING = "https://www."
     
 
     if store == "Webhallen":
-        URL = starting + "webhallen.com/product/" + product_id
+        URL = STARTING + store + ".com/product/" + product_id
     elif store == "Manatorsk":
         URL = "manatorsk.com/products/" + product_id ##ProductID for mana is their handle
 
@@ -30,5 +30,13 @@ def build_product_url(store, product_id):
 
 
 
-def build_image_url():
-    pass
+def build_image_url(store, product_id, img_url = ""):
+    URL = ""
+    STARTING = "https://www."
+
+    if store == "Webhallen":
+        URL = STARTING + store + "/images/product/" + product_id + "?trim"
+    elif store == "Manatorsk":
+        URL = img_url
+    
+    return URL
