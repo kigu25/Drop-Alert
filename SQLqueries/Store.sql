@@ -7,4 +7,5 @@ INSERT INTO store(storeName) VALUES
 ("PokeTalk"),
 ("Playoteket"),
 ("Hobbykort"),
-("Åhlens");
+("Åhlens"),
+("Maxgaming");
