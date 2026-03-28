@@ -38,6 +38,7 @@ def manatorsk_stock_monitor():
                         discord.restock_webhook(key["name"], key["price"], STORE, key["handle"], key["img_url"])
                     if key["quantity"] != quantity:
                         db_calls.update_quantity(store_id, key["id"], key["quantity"])
+                    break
     #TODO: Add a discord webhook to notify admins when a new product that's not in known_ids is found and added to DB
     #? Right way to do this? We have an inplemented solution for the monitors but we need it for srapers aswell.
     #? Maybe find a solution that works for both in db_calls.insertMatches()
