@@ -40,3 +40,13 @@ def build_image_url(store, product_id, img_url = ""):
         print("ERROR: Could not generate image_url !")
     
     return URL
+
+
+
+def get_faviocn_url(store):
+    favicons = {
+        "Webhallen": "https://www.webhallen.com/favicon.ico",
+        "Manatorsk": "https://manatorsk.com/cdn/shop/files/COD_MANATORSK_FullColor_32x32.png?v=1614335733"
+    }
+
+    return favicons.get(store)
