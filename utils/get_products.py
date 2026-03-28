@@ -1,5 +1,6 @@
 import requests
 from utils import stores_info
+from bs4 import BeautifulSoup
 
 
 
@@ -54,3 +55,9 @@ def get_manatorsk_products(store):
             break
 
     return products
+
+
+
+
+def get_maxgaming_products():
+    pass
