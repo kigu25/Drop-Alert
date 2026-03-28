@@ -31,7 +31,6 @@ def webhallen_stock_monitor():
         # If the ID is not known, insert it to DB and send a webhook to notify of new product
         if key["id"] not in known_ids:
             db_calls.insert_matches([key], STORE)
-            new_product_webhook(STORE, key["name"], key["price"], key["id"])
 
         else:
             for external_id, quantity in rows_db:
@@ -41,8 +40,5 @@ def webhallen_stock_monitor():
                     if key["quantity"] != quantity:
                         db_calls.update_quantity(store_id, key["id"], key["quantity"])
                     break
-    #TODO: We don't want a webhook restock-alert to be sent when the product stock is only pre-loaded for release
-    # TODO: To fix this we could check if there is a release-date key in the JSON repsonse from the API Call and save that in DB
-    # TODO: And use that to onlyd ping if curdate() >= relase-date, otherwise send a pre-loaded-product webhook-alert to discord
     print("Webhallen done")
 

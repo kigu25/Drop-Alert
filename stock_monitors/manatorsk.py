@@ -29,7 +29,6 @@ def manatorsk_stock_monitor():
         # If the ID is not known, insert it to DB and send a webhook to notify of new product
         if key["id"] not in known_ids:
             db_calls.insert_matches([key], STORE)
-            new_product_webhook(STORE, key["name"], key["price"], key["handle"], key["img_url"])
 
         else:
             for external_id, quantity in rows_db:
@@ -39,7 +38,4 @@ def manatorsk_stock_monitor():
                     if key["quantity"] != quantity:
                         db_calls.update_quantity(store_id, key["id"], key["quantity"])
                     break
-    #TODO: Add a discord webhook to notify admins when a new product that's not in known_ids is found and added to DB
-    #? Right way to do this? We have an inplemented solution for the monitors but we need it for srapers aswell.
-    #? Maybe find a solution that works for both in db_calls.insertMatches()
     print("Manatorsk Done")
