@@ -55,9 +55,3 @@ def get_manatorsk_products(store):
             break
 
     return products
-
-
-
-
-def get_maxgaming_products():
-    pass

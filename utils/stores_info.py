@@ -3,7 +3,6 @@ LINK_DICT = {
         
     "Webhallen" : "https://www.webhallen.com/api/productdiscovery/search/pokemon?page=1&touchpoint=DESKTOP&totalProductCountSet=false&origin=ORGANIC&sortBy=latest&limit=100",
     "Manatorsk" : "https://manatorsk-elastic-filter-production.up.railway.app/api/search",
-    "Maxgaming" : "https://www.maxgaming.se/sok?q=pokemon"
 
     }
 
@@ -23,8 +22,9 @@ def build_product_url(store, product_id):
         URL = f"{STARTING}{store}.com/product/{product_id}"
     elif store == "Manatorsk":
         URL = f"https://manatorsk.com/products/{product_id}" ##ProductID for mana is their handle
-    elif store == "Maxgaming":
-        URL = f"https://www.maxgaming.se/pokemon/{product_id}"
+
+    else:
+        print("Could not build the productURL")
 
     return URL
 
@@ -39,8 +39,7 @@ def build_image_url(store, product_id, img_url = ""):
         URL = f"{STARTING}{store}.com/images/product/{product_id}?trim"
     elif store == "Manatorsk":
         URL = img_url
-    elif store == "Maxgaming":
-        pass
+        
     else:
         print("ERROR: Could not generate image_url !")
     
@@ -52,7 +51,6 @@ def get_faviocn_url(store):
     favicons = {
         "Webhallen": "https://www.webhallen.com/favicon.ico",
         "Manatorsk": "https://manatorsk.com/cdn/shop/files/COD_MANATORSK_FullColor_32x32.png?v=1614335733",
-        "Maxgaming": "https://www.maxgaming.se/themes/maxgaming/design/bilder/maxgaming.png"
     }
 
     return favicons.get(store)
