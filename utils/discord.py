@@ -1,6 +1,6 @@
 import os
 import requests
-from utils.stores_info import build_product_url, build_image_url
+from utils.stores_info import build_product_url, build_image_url, get_faviocn_url
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 
@@ -24,7 +24,7 @@ def restock_webhook(item_name, price, store, product_id, imgUrl = ""):
 
 
     #Embed all the stuff into the message
-    embed.set_author(name=f"Restock", icon_url=f"https://www.{store}.com/favicon.ico")
+    embed.set_author(name=f"Restock", icon_url=get_faviocn_url(store))
 
     embed.add_embed_field(name="Store", value=store, inline=True)
     embed.add_embed_field(name="Price", value=f"{price} kr", inline=True)
@@ -33,7 +33,7 @@ def restock_webhook(item_name, price, store, product_id, imgUrl = ""):
     #Add the file to the webhook then embed it.
     webhook.add_file(file=image_data, filename="product.jpg")
     embed.set_thumbnail(url="attachment://product.jpg")
-    embed.set_footer(text="Restock Alert", icon_url=f"https://www.{store}.com/favicon.ico")
+    embed.set_footer(text="Restock Alert", icon_url=get_faviocn_url(store))
     embed.set_timestamp()
 
     webhook.add_embed(embed)
